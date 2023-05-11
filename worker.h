@@ -12,6 +12,7 @@ Linked list로 구현하기
 
 class worker{
     public:
+    worker *link;
     string name; //회사원 이름 (공백없음) [입럭 받는 정보]]
     string id; //회사원의 고유 아이디 (공백 없음) [22200XXX]
     char department; //부서 (한글자로 입력) 관리팀: M, 디자인팀: D, 회계팀: A, 기획팀: P [입력받는 정보]
@@ -34,6 +35,7 @@ void worker :: setData(string n, char dep, string tA, int wH, int bT){
 class company{
     worker *head; //company의 head(시작점) [여기서 addWorker가 이루어짐]
     public:
+    company();
     void addWorker(worker t); //addToHead() 와 같은 기능, 회사원 정보 추가
     void listWorker(); //모든 회사원의 정보를 출력
     void updateWorker(string s); //회사원의 정보를 업데이트, 업데이트 할 정보를 위해 고유 아이디를 입력받음
@@ -46,3 +48,6 @@ class company{
     void saveFile(); //파일에 저장, 이미 파일이 존재 한다면 파일 정보 지우고 리스트에 있는 정보로 저장
     bool emptyCheck(); //company 리스트가 empty인지 체크
 };
+company :: company(){
+    head = NULL;
+}
