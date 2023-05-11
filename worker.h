@@ -44,6 +44,7 @@ class company{
     int sumHours(); //모든 회사원의 총 일하는 시간
     void searchName(string s); //이름으로 검색하기, 같은 이름이 있다면 모두 출력
     void searchDepart(char c); //검색하려는 부서에 포함된 회사원들의 정보 출력
+    void searchHours(int h); //일하는 총시간이 입력된 값과 같은 회사원의 정보를 출력
     void loadFile(); //파일에 있는 정보 로드해오기, 파일이 없다면 파일이 존재하지 않는다고 출력
     void saveFile(); //파일에 저장, 이미 파일이 존재 한다면 파일 정보 지우고 리스트에 있는 정보로 저장
     bool emptyCheck(); //company 리스트가 empty인지 체크

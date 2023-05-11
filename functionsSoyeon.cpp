@@ -1,5 +1,4 @@
 #include "worker.h"
-#include <map>
 
 //company 리스트가 empty인지 체크
 bool company :: emptyCheck(){
