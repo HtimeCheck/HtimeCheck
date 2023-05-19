@@ -53,3 +53,17 @@ void company :: searchDepart(char c){
     }
     cout << "총인원은 " << count << "명 입니다." << endl;
 }
+void company :: searchHours(int h){
+    int count = 0;
+    cout << "총 일하는 시간으로 " << h << "시간을 검색한 결과" << endl;
+    cout << "------------------------------------------------------------" << endl;
+    cout << "| 이름 | 아이디 | 부서 | 출근 시간 | 일하는 시간 | 쉬는 시간 | 퇴근 시간 |" << endl;
+    cout << "------------------------------------------------------------" << endl;
+    for(worker *p = head ; p != NULL ; p = p->link){
+        if(p->workingHours == h){
+            count ++;
+            cout << p->name << " " << p->id << " " << p->department << " " << p->timeArrived << " " << p->workingHours << " " << p->breakTime << " " << p->endTime << endl;
+        }
+    }
+    cout << "총인원은 " << count << "명 입니다." << endl;
+}
