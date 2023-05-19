@@ -50,5 +50,35 @@ void updateWorker(string s){
     if(!found){
         cout << "ID가" << s << "인 회사원을 찾지 못했습니다." << endl;
     }
+}
+
+void company::deleteWorker(string s){
+    worker *current = head;
+    worker *previous = NULL;
+    //헤드가 비었을 때
+    if(current == NULL){
+        cout << "파일이 비었습니다." << endl;
+        return;
+    }
+    //삭제할 노드가 헤드일 때
+    if(current->id == s){
+        head = current->link;
+        delete current;
+        cout << "회사원의 정보가 삭제되었습니다." << endl;
+        return;
+    }
+    //삭제할 노드가 헤드가 아닐 때
+    while(current != NULL){
+        if(current->id == s){
+            previous->link = current->link;
+            delete current;
+            cout << "회사원의 정보가 삭제되었습니다." << endl;
+            return;
+        }
+        previous = current;
+        current = current->link;
+    }
+    //없는 id를 입력받았을 경우
+    cout << "해당 id는 존재하지 않습니다." <<endl;
 
 }
