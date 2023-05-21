@@ -80,5 +80,24 @@ void company::deleteWorker(string s){
     }
     //없는 id를 입력받았을 경우
     cout << "해당 id는 존재하지 않습니다." <<endl;
+}
 
+int company::numWorkers() {
+    int count = 0;
+    worker* current = head;
+    while (current != NULL) {
+        count++;
+        current = current->link;
+    }
+    return count;
+}
+
+int company::sumHours() {
+    int sumH = 0;
+    worker* current = head;
+    while (current != NULL) {
+        sumH += current->workingHours;
+        current = current->link;
+    }
+    return sumH;
 }
