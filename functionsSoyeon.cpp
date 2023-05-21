@@ -72,17 +72,35 @@ void company :: searchHours(int h){
 
 //파일에 있는 정보 로드해오기, 파일이 없다면 파일이 존재하지 않는다고 출력
 int company :: loadFile(){ 
+    worker *t = head;
     int i = 0;
     FILE *fp = fopen("worker.txt", "r");
     if(fp == NULL){
-        printf("\n파일이 존재 하지 않음 !!\n");
+        cout << "\n파일이 존재 하지 않음 !!\n";
         return 0;
     }
-
-
+    for(;i<100;i++){
+        fscanf(fp,"%s",t->name);
+        if(feof(fp)) break;
+        fscanf(fp,"%s",t->id);
+        fscanf(fp,"%c",t->department);
+        fscanf(fp,"%s",t->timeArrived);
+        fscanf(fp,"%d",t->workingHours);
+        fscanf(fp,"%d",t->breakTime);
+        fscanf(fp,"%s",t->endTime);
+        t->link = NULL;
+    }
+    fclose(fp);
+    cout << "파일 로드 성공!!" << endl;
+    return i;
 }
 
 //파일에 저장, 이미 파일이 존재 한다면 파일 정보 지우고 리스트에 있는 정보로 저장
 void company :: saveFile(){ 
-
+    FILE *fp = fopen("worker.txt","w");
+    for(worker *t = head; t != NULL; t= t->link){
+        fprintf(fp,"%s %s %c %s %d %d %s\n",t->name, t->id, t->department, t->timeArrived, t->workingHours, t->breakTime, t->endTime);
+    }
+    fclose(fp);
+    cout << "파일에 저장됨!!" << endl;
 }
