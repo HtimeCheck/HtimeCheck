@@ -53,6 +53,8 @@ void company :: searchDepart(char c){
     }
     cout << "총인원은 " << count << "명 입니다." << endl;
 }
+
+//일하는 총시간이 입력된 값과 같은 회사원의 정보를 출력
 void company :: searchHours(int h){
     int count = 0;
     cout << "총 일하는 시간으로 " << h << "시간을 검색한 결과" << endl;
@@ -66,4 +68,21 @@ void company :: searchHours(int h){
         }
     }
     cout << "총인원은 " << count << "명 입니다." << endl;
+}
+
+//파일에 있는 정보 로드해오기, 파일이 없다면 파일이 존재하지 않는다고 출력
+int company :: loadFile(){ 
+    int i = 0;
+    FILE *fp = fopen("worker.txt", "r");
+    if(fp == NULL){
+        printf("\n파일이 존재 하지 않음 !!\n");
+        return 0;
+    }
+
+
+}
+
+//파일에 저장, 이미 파일이 존재 한다면 파일 정보 지우고 리스트에 있는 정보로 저장
+void company :: saveFile(){ 
+
 }
