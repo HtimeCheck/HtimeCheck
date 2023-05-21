@@ -20,7 +20,7 @@ void company::listWorker(){
     }
 }
 
-void updateWorker(string s){
+void company :: updateWorker(string s){
     worker* temp;
     temp = new worker;
     bool found = false; //존재하는 정보인지 여부에 대한 변수
