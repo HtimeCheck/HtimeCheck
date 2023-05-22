@@ -104,3 +104,13 @@ void company :: saveFile(){
     fclose(fp);
     cout << "파일에 저장됨!!" << endl;
 }
+//같은 아이디인 사람이 있는지 확인
+bool company :: idCheck(string s){
+    for(worker *p = head ; p != NULL ; p = p->link){
+        if(p->id == s){ 
+            //id가 존재 한다면 false를 return
+            return true;
+        }
+    }
+    return false;
+}

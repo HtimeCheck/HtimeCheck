@@ -48,6 +48,7 @@ class company{
     int loadFile(); //파일에 있는 정보 로드해오기, 파일이 없다면 파일이 존재하지 않는다고 출력
     void saveFile(); //파일에 저장, 이미 파일이 존재 한다면 파일 정보 지우고 리스트에 있는 정보로 저장
     bool emptyCheck(); //company 리스트가 empty인지 체크
+    bool idCheck(string s); //같은 아이디인 사람이 있는지 확인
 };
 company :: company(){
     head = NULL;
