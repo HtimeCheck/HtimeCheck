@@ -40,7 +40,7 @@
     |3|department|char|M|부서 (한글자로 입력)|
     |4|timeArrived|string|0900|출근 시간 (공백 없음)|
     |5|workingHours|int|8|총 일하는 시간 (hour 단위로 받음)|
-    |6|breakTime|int|1|쉬는 시단,점심시간(hour 단위로 받음)|
+    |6|breakTime|int|1|쉬는 시간,점심시간(hour 단위로 받음)|
     |7|endTime|string|1800|퇴근 시간 (공백 없음)|
     
 + 추가 정보
