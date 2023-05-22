@@ -20,14 +20,15 @@ void company::listWorker(){
     }
 }
 
-void company :: updateWorker(string s){
+void company ::updateWorker(string s){
     worker* temp;
     temp = new worker;
-    bool found = false; //존재하는 정보인지 여부에 대한 변수
+    if(!idCheck(s)){
+        cout << "ID가" << s << "인 회사원을 찾지 못했습니다." << endl;
+        return;
+    }
     while (temp != nullptr){
         if(temp ->id == s){
-            found = true;
-            cout << "수정할 아이디를 입력하세요: ";
             string n, tA;//이름과 출근시간
             char dep; //부서
             int wH, bT; //일하는 시간과 쉬는 시간
@@ -46,9 +47,6 @@ void company :: updateWorker(string s){
             break;
         }
         temp = temp ->link;
-    }
-    if(!found){
-        cout << "ID가" << s << "인 회사원을 찾지 못했습니다." << endl;
     }
 }
 
