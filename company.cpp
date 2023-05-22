@@ -14,6 +14,7 @@ int main(void){
         switch (menu){
         case 1:
             //회사원 정보 추가
+            
             cout << "-----------------------------------" << endl;
             cout << "           회사원 정보 추가            " << endl;
             cout << "-----------------------------------" << endl;
@@ -30,6 +31,10 @@ int main(void){
             cin >> wH;
             cout << "쉬는 시간 (시간 단위): ";
             cin >> bT;
+            if(myCompany.idCheck(i)){
+                cout << "이미 해당 아이디를 가진 회사원의 정보가 존재합니다!" << endl;
+                break;
+            }
             temp.setData(n, i, dep, tA, wH, bT);
             cout << "회사원의 정보가 성공적으로 저장되었습니다." << endl;
             myCompany.addWorker(temp);
