@@ -1,9 +1,11 @@
 #include "worker.h"
 #include <cstring>
+#include <fstream>
+#include <string>
 
 int selectMenu(){
     int menu;
-    cout << "-----------------------------------"<< endl;
+    cout << "\n-----------------------------------"<< endl;
     cout << "1. 회사원 정보 저장" << endl;
     cout << "2. 회사원 정보 읽기" << endl;
     cout << "3. 회사원 정보 수정" << endl;
@@ -19,8 +21,9 @@ int selectMenu(){
     cin >> menu;
     return menu;
 }
-void worker :: setData(string n, char dep, string tA, int wH, int bT){
+void worker :: setData(string n, string i, char dep, string tA, int wH, int bT){
     name = n; //이름
+    id = i;
     department = dep; //부서
     timeArrived = tA; //출근 시간
     workingHours = wH; //일하는 시간
@@ -41,7 +44,6 @@ void company::addWorker(worker t){
 }
 
 void company::listWorker(){
-    cout << "********직원 출퇴근 관리 목록********" << endl;
     worker* temp = head;
     cout << "------------------------------------------------------------" << endl;
     cout << "| 이름 | 아이디 | 부서 | 출근 시간 | 일하는 시간 | 쉬는 시간 | 퇴근 시간 |" << endl;
@@ -54,29 +56,31 @@ void company::listWorker(){
 
 void company :: updateWorker(string s){
     worker* temp;
-    temp = new worker;
+    temp = head;
     bool found = false; //존재하는 정보인지 여부에 대한 변수
     if(!idCheck(s)){
         cout << "ID가" << s << "인 회사원을 찾지 못했습니다." << endl;
         return;
     }
+    string n,i, tA;//이름과 출근시간
+    char dep; //부서
+    int wH, bT; //일하는 시간과 쉬는 시간
+    cout << "이름: ";
+    cin >> n;
+    cout << "아이디: ";
+    cin >> i;
+    cout << "부서: ";
+    cin >> dep;
+    cout << "출근시간: ";
+    cin >> tA;
+    cout << "일하는 시간: ";
+    cin >> wH;
+    cout << "쉬는 시간: ";
+    cin >> bT;
     while (temp != nullptr){
         if(temp ->id == s){
             found = true;
-            string n, tA;//이름과 출근시간
-            char dep; //부서
-            int wH, bT; //일하는 시간과 쉬는 시간
-            cout << "이름: ";
-            cin >> n;
-            cout << "부서: ";
-            cin >> dep;
-            cout << "출근시간: ";
-            cin >> tA;
-            cout << "일하는 시간: ";
-            cin >> wH;
-            cout << "쉬는 시간: ";
-            cin >> bT;
-            temp-> setData(n, dep, tA, wH, bT);
+            temp-> setData(n, i, dep, tA, wH, bT);
             cout << "회사원의 정보가 성공적으로 수정되었습니다." << endl;
             break;
         }
@@ -93,8 +97,8 @@ void company::deleteWorker(string s){
         return;
     }
     if(!idCheck(s)){
-        
-
+        cout << "해당 아이디를 가진 회사원이 존재하지 않습니다!\n";
+        return;
     }
     //삭제할 노드가 헤드일 때
     if(current->id == s){
@@ -151,7 +155,7 @@ void company :: searchName(string s){
     for(worker *p = head ; p != NULL ; p = p->link){
         if(p->name == s){
             count ++;
-            cout << p->name << " " << p->id << " " << p->department << " " << p->timeArrived << " " << p->workingHours << " " << p->breakTime << " " << p->endTime << endl;
+            cout << p->name << " | " << p->id << " | " << p->department << " | " << p->timeArrived << " | " << p->workingHours << " | " << p->breakTime << " | " << p->endTime << endl;
         }
     }
     cout << "총인원은 " << count << "명 입니다." << endl;
@@ -184,7 +188,7 @@ void company :: searchDepart(char c){
     for(worker *p = head ; p != NULL ; p = p->link){
         if(p->department == c){
             count ++;
-            cout << p->name << " " << p->id << " " << p->department << " " << p->timeArrived << " " << p->workingHours << " " << p->breakTime << " " << p->endTime << endl;
+            cout << p->name << " | " << p->id << " | " << p->department << " | " << p->timeArrived << " | " << p->workingHours << " | " << p->breakTime << " | " << p->endTime << endl;
         }
     }
     cout << "총인원은 " << count << "명 입니다." << endl;
@@ -200,36 +204,34 @@ void company :: searchHours(int h){
     for(worker *p = head ; p != NULL ; p = p->link){
         if(p->workingHours == h){
             count ++;
-            cout << p->name << " " << p->id << " " << p->department << " " << p->timeArrived << " " << p->workingHours << " " << p->breakTime << " " << p->endTime << endl;
+            cout << p->name << " | " << p->id << " | " << p->department << " | " << p->timeArrived << " | " << p->workingHours << " | " << p->breakTime << " | " << p->endTime << endl;
         }
     }
     cout << "총인원은 " << count << "명 입니다." << endl;
 }
 
 //파일에 있는 정보 로드해오기, 파일이 없다면 파일이 존재하지 않는다고 출력
-int company :: loadFile(){ 
-    worker *t = head;
-    int i = 0;
-    FILE *fp = fopen("worker.txt", "r");
-    if(fp == NULL){
-        cout << "\n파일이 존재 하지 않음 !!\n";
-        return 0;
+void company::loadFile() {
+    worker* temp;
+    ifstream file("worker.txt");
+    if (!file.is_open()) {
+        std::cout << "\n파일이 존재하지 않음!!\n";
+        return;
     }
-    for(;i<100;i++){
-        fscanf(fp,"%s",t->name);
-        if(feof(fp)) break;
-        fscanf(fp,"%s",t->id);
-        fscanf(fp,"%c",t->department);
-        fscanf(fp,"%s",t->timeArrived);
-        fscanf(fp,"%d",t->workingHours);
-        fscanf(fp,"%d",t->breakTime);
-        fscanf(fp,"%s",t->endTime);
-        t->link = NULL;
+    string n, id, tA, eT;
+    char dep;
+    int wH, bT;
+    while (file >> n >> id >> dep >> tA >> wH >> bT >> eT) {
+        temp = new worker;
+        temp->setData(n, id, dep, tA, wH, bT);
+        temp->link = head;
+        head = temp;
     }
-    fclose(fp);
+    file.close();
     cout << "파일 로드 성공!!" << endl;
-    return i;
 }
+
+
 
 //파일에 저장, 이미 파일이 존재 한다면 파일 정보 지우고 리스트에 있는 정보로 저장
 void company :: saveFile(){ 
