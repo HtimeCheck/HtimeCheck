@@ -212,7 +212,8 @@ void company :: searchHours(int h){
 
 //파일에 있는 정보 로드해오기, 파일이 없다면 파일이 존재하지 않는다고 출력
 void company::loadFile() {
-    worker* temp;
+    worker* temp ;
+    head = NULL;
     ifstream file("worker.txt");
     if (!file.is_open()) {
         std::cout << "\n파일이 존재하지 않음!!\n";

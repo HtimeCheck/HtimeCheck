@@ -123,7 +123,8 @@ int main(void){
             }else{
                 avg = myCompany.sumHours() / myCompany.numWorkers();
             }
-            cout << "모든 인원의 편균 일하는 시간: " <<  avg << " 시간" << endl;
+            cout << "모든 인원의 평균 일하는 시간: " <<  avg << " 시간" << endl;
+            break;
         case 9:
             // 파일 읽기
             cout << "-----------------------------------" << endl;
