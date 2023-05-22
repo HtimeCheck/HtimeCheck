@@ -20,15 +20,17 @@ void company::listWorker(){
     }
 }
 
-void company ::updateWorker(string s){
+void company :: updateWorker(string s){
     worker* temp;
     temp = new worker;
+    bool found = false; //존재하는 정보인지 여부에 대한 변수
     if(!idCheck(s)){
         cout << "ID가" << s << "인 회사원을 찾지 못했습니다." << endl;
         return;
     }
     while (temp != nullptr){
         if(temp ->id == s){
+            found = true;
             string n, tA;//이름과 출근시간
             char dep; //부서
             int wH, bT; //일하는 시간과 쉬는 시간
@@ -58,6 +60,10 @@ void company::deleteWorker(string s){
         cout << "파일이 비었습니다." << endl;
         return;
     }
+    if(!idCheck(s)){
+        
+
+    }
     //삭제할 노드가 헤드일 때
     if(current->id == s){
         head = current->link;
@@ -76,8 +82,6 @@ void company::deleteWorker(string s){
         previous = current;
         current = current->link;
     }
-    //없는 id를 입력받았을 경우
-    cout << "해당 id는 존재하지 않습니다." <<endl;
 }
 
 int company::numWorkers() {
