@@ -1,3 +1,6 @@
+#ifndef __WORKER_H__
+#define __WORKER_H__
+
 #include <iostream>
 using namespace std;
 #include <string> 
@@ -9,6 +12,7 @@ using namespace std;
 쉬는 시간과 일하는 시간은 hour단위로 입력받아 계산을 조금 더 쉽게 만듬
 Linked list로 구현하기
 */
+int selectMenu();
 
 class worker{
     public:
@@ -22,16 +26,7 @@ class worker{
     string endTime; //퇴근시간 (공백없음) [산출 되는 정보]
     void setData(string n, char dep, string tA, int wH, int bT);
 };
-void worker :: setData(string n, char dep, string tA, int wH, int bT){
-    name = n; //이름
-    department = dep; //부서
-    timeArrived = tA; //출근 시간
-    workingHours = wH; //일하는 시간
-    breakTime = bT; //쉬는 시간
-    
-    int end = stoi(tA) + wH*100 + bT*100; //퇴근 시간 구하기
-    endTime = to_string(end); //퇴근 시간
-}
+
 class company{
     worker *head; //company의 head(시작점) [여기서 addWorker가 이루어짐]
     public:
@@ -50,6 +45,5 @@ class company{
     bool emptyCheck(); //company 리스트가 empty인지 체크
     bool idCheck(string s); //같은 아이디인 사람이 있는지 확인
 };
-company :: company(){
-    head = NULL;
-}
+
+#endif
